@@ -1,24 +1,26 @@
-package ps2.teoria06;
+package ps2.teoria07;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class Titular {
-    @Id
-    private long id;
+public class Professor {
+    @Id @GeneratedValue
+    private Long id;
     private String nome;
     private String cpf;
-    public Titular() {}
-    public Titular(long id, String n, String c) {
-        this.id = id;
+    private int matricula;
+    public Professor() {}
+    public Professor(String n, String c, int m) {
         nome = n;
         cpf = c;
+        matricula = m;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public long getId() {
+    public Long getId() {
         return id;
     }
     public void setNome(String n) {
@@ -32,5 +34,11 @@ public class Titular {
     }
     public String getCpf() {
         return cpf;
+    }
+    public void setMatricula(int m) {
+        matricula = m;
+    }
+    public int getMatricula() {
+        return matricula;
     }
 }

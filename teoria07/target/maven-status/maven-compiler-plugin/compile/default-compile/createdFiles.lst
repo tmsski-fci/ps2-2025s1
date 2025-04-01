@@ -1,3 +1,5 @@
-ps2/teoria06/App.class
-ps2/teoria06/Titular.class
-ps2/teoria06/TitularRepo.class
+ps2/teoria07/Professor.class
+ps2/teoria07/App.class
+ps2/teoria07/FaculdadeRepo.class
+ps2/teoria07/ProfessorRepo.class
+ps2/teoria07/Faculdade.class

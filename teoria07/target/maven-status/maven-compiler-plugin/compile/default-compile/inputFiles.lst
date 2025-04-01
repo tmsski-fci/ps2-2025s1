@@ -1,3 +1,5 @@
-/data/data/com.termux/files/home/ps2-2025s1/teoria07/src/main/java/ps2/teoria06/App.java
-/data/data/com.termux/files/home/ps2-2025s1/teoria07/src/main/java/ps2/teoria06/Titular.java
-/data/data/com.termux/files/home/ps2-2025s1/teoria07/src/main/java/ps2/teoria06/TitularRepo.java
+/workspaces/ps2-2025s1/teoria07/src/main/java/ps2/teoria07/App.java
+/workspaces/ps2-2025s1/teoria07/src/main/java/ps2/teoria07/Faculdade.java
+/workspaces/ps2-2025s1/teoria07/src/main/java/ps2/teoria07/FaculdadeRepo.java
+/workspaces/ps2-2025s1/teoria07/src/main/java/ps2/teoria07/Professor.java
+/workspaces/ps2-2025s1/teoria07/src/main/java/ps2/teoria07/ProfessorRepo.java
