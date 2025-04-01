@@ -62,6 +62,7 @@ public class App implements CommandLineRunner {
 			out.println(t.getId() + " - " + t.getNome() + " - " + t.getCpf() );
 		}
 	}
+	
 	public void ler() {} 
 	public void alterar() {}
 	public void apagar() {}
