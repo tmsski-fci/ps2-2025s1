@@ -1,6 +1,12 @@
 package ps2.teoria09;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
 public class Padaria {
+    @Id @GeneratedValue
     private long id;
     private String nome;
     private String endereco;
