@@ -1,0 +1,43 @@
+### GET
+GET http://localhost:8080/dev/professores
+
+
+### POST
+POST http://localhost:8080/dev/professores
+Content-Type: application/json
+
+{
+    "nome": "Ana",
+    "matricula": "12345",
+    "area": "Engenharia",
+    "faculdade": {
+        "id": "3"
+    }
+}
+
+
+### POST
+POST http://localhost:8080/dev/professores
+Content-Type: application/json
+
+{
+    "nome": "Bob",
+    "matricula": "11111",
+    "area": "Inteligência Artificial",
+    "faculdade": {
+        "id": "1"
+    }
+}
+
+### POST
+POST http://localhost:8080/dev/professores
+Content-Type: application/json
+
+{
+    "nome": "Carmem",
+    "matricula": "54321",
+    "area": "Direito Trabalhista",
+    "faculdade": {
+        "id": "2"
+    }
+}

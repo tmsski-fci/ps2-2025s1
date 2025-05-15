@@ -1,0 +1,49 @@
+### POST
+POST http://localhost:8080/dev/faculdades
+Content-Type: application/json
+
+{
+    "nome": "Faculdade de Computação e Informática",
+    "anoFundacao": "1970",
+    "cidade": "São Paulo",
+    "estado": "SP"
+}
+
+### POST
+POST http://localhost:8080/dev/faculdades
+Content-Type: application/json
+
+{
+    "nome": "Faculdade de Direito",
+    "anoFundacao": "1960",
+    "cidade": "São Paulo",
+    "estado": "SP"
+}
+
+### POST
+POST http://localhost:8080/dev/faculdades
+Content-Type: application/json
+
+{
+    "nome": "Escola de Engenharia",
+    "anoFundacao": "1870",
+    "cidade": "São Paulo",
+    "estado": "SP"
+}
+
+### POST
+POST http://localhost:8080/dev/faculdades
+Content-Type: application/json
+
+{
+    "nome": "Faculdade de Administração",
+    "anoFundacao": "1965",
+    "cidade": "São Paulo",
+    "estado": "SP"
+}
+
+### GET
+GET http://localhost:8080/dev/faculdades
+
+
+
