@@ -1,0 +1,208 @@
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>Professores</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+    </head>
+    
+    <body>
+        <h1>Gerenciamento de Professores</h1>
+
+        <table id="tabelaFormulario">    
+            <tr> <td>ID:</td> <td><input type="text" id="txtId"></td> </tr>
+            <tr> <td>Nome:</td> <td><input type="text" id="txtNome"></td> </tr>
+            <tr> <td>Matrícula:</td> <td><input type="text" id="txtMatricula"></td> </tr>
+            <tr> <td>Área:</td> <td><input type="text" id="txtArea"></td> </tr> 
+            <tr><td></td><td>
+                <input type="button" value="Salvar" onclick="salvarProfessor()" id="btnSalvar">
+                <input type="button" value="Apagar" onclick="apagarProfessor()" id="btnApagar">
+                <input type="button" value="Cancelar" onclick="cancelarEdicao()" id="btnCancelar">
+            </td></tr>
+        </table> 
+        
+		
+		<p style="font-weight:bold" id="paragrafoMensagem"></p>
+		
+        <table id="tabelaProfessores">  
+			<tr><td><input type="button" value="Novo" onclick="novoProfessor()" id="btnNovo"></td> <td></td> <td></td></tr>
+            <tr> <th>ID</th> <th>Nome</th> <th>Matrícula</th> <th>Área</th> </tr>
+            <tbody id="corpoTabelaProfessores"> </tbody>
+        </table>
+        
+		<script src="rest.js"></script>
+	    <script>
+			const tabelaProfessores = document.querySelector('#tabelaProfessores');
+			const tabelaFormulario = document.querySelector('#tabelaFormulario');
+	        const corpoTabela = document.querySelector('#corpoTabelaProfessores');
+	        const paragrafoMensagem = document.querySelector('#paragrafoMensagem');
+	        const txtNome = document.querySelector('#txtNome');
+	        const txtMatricula = document.querySelector('#txtMatricula');
+	        const txtArea = document.querySelector('#txtArea');
+	        const txtId = document.querySelector('#txtId');
+	        
+	        const btnNovo = document.querySelector('#btnNovo');
+	        const btnSalvar = document.querySelector('#btnSalvar');
+	        const btnApagar = document.querySelector('#btnApagar');
+	        const btnCancelar = document.querySelector('#btnCancelar');
+	        var criandoNovoProfessor = false;
+	        
+	        inicializar();
+
+	        function inicializar() {
+	        	criandoNovoProfessor = false;
+	            paragrafoMensagem.textContent = 'Pressione o botão Novo ou selecione um professor da lista:'
+	            txtId.value = '';
+	            txtNome.value = '';
+	            txtMatricula.value = '';
+	            txtArea.value = '';
+	            txtId.disabled = true;
+	            txtNome.disabled = true;
+	            txtMatricula.disabled = true;
+	            txtArea.disabled = true;
+	            
+	            btnNovo.disabled = false;
+	            btnSalvar.disabled = true;
+	            btnApagar.disabled = true;
+	            btnCancelar.disabled = true;
+				
+				tabelaFormulario.style.display = 'none';
+				tabelaProfessores.style.display = 'inline';
+				
+	            listarTodosProfessores();            
+	        }
+
+	        function listarTodosProfessores() {
+				const errorHandler = function(error) { 
+					paragrafoMensagem.textContent = "Erro ao listar professores (código " + error.message + ")";
+				}
+	            asyncLerProfs(preencherTabela, errorHandler);
+	        }
+	        
+	        function preencherTabela(professores) {
+				corpoTabela.innerHTML = "";
+	            var n = professores.length;
+	            for (var i = 0; i < n; i++) {
+	                let p = professores[i];
+					let linha = corpoTabela.insertRow();
+					let celulaId = linha.insertCell();
+					let celulaNome = linha.insertCell();
+					let celulaMatricula = linha.insertCell();
+					let celulaArea = linha.insertCell();
+					
+					let alink = document.createElement('a');
+					alink.textContent = p.id;
+					alink.href = "javascript:void(0)";
+					alink.onclick =  function() { selecionarProfessor(p.id); };
+	                celulaId.appendChild(alink);
+					celulaNome.textContent = p.nome;
+	                celulaMatricula.textContent = p.matricula;
+	                celulaArea.textContent = p.area;
+	            }
+	        }
+	        
+	        function selecionarProfessor(id) {
+	        	criandoNovoProfessor = false;
+				const errorHandler = function(error) { 
+					paragrafoMensagem.textContent = "Erro ao selecionar professor (código " + error.message + ")";
+				}
+	            asyncLerProfById(id, preencherFormulario, errorHandler);				
+			}
+	        	
+			function preencherFormulario(professor) {
+	            paragrafoMensagem.textContent = 'Altere e salve os dados do professor, ou então apague o registro do professor.'
+	            txtId.value = professor.id;
+	            txtNome.value = professor.nome;
+	            txtMatricula.value = professor.matricula;
+	            txtArea.value = professor.area;
+	            
+	            txtId.disabled = true;
+	            txtNome.disabled = false;
+	            txtMatricula.disabled = false;
+	            txtArea.disabled = false;
+	            
+	            btnNovo.disabled = true;
+	            btnSalvar.disabled = false;
+	            btnApagar.disabled = false;
+	            btnCancelar.disabled = false;  
+				
+				tabelaFormulario.style.display = 'inline';
+				tabelaProfessores.style.display = 'none';
+	        }
+
+	        function novoProfessor() {
+	        	paragrafoMensagem.textContent = 'Preencha os dados do novo professor...';
+	        	criandoNovoProfessor = true;
+	        	
+	        	txtId.value = '';
+	        	txtNome.value = '';
+	        	txtMatricula.value = '';
+	        	txtArea.value = '';
+	        	
+	        	txtId.disabled = true;
+	        	txtNome.disabled = false;
+	        	txtMatricula.disabled = false;
+	        	txtArea.disabled = false;
+	        	
+	        	btnNovo.disabled = true;
+	        	btnSalvar.disabled = false;
+	        	btnApagar.disabled = true;
+	        	btnCancelar.disabled = false;
+				
+				tabelaFormulario.style.display = 'inline';
+				tabelaProfessores.style.display = 'none';
+	        }
+	        
+	        function salvarProfessor() {
+	        	if (criandoNovoProfessor) {
+	        		criarProfessor();
+	        	}
+	        	else {
+	        		alterarProfessor();
+	        	}
+	        }
+	        
+	        function criarProfessor() {
+	        	const dadosProfessor = {
+	        		'nome': txtNome.value,
+	        		'matricula': txtMatricula.value,
+	        		'area': txtArea.value
+	        	};
+				const errorHandler = function(error) { 
+					paragrafoMensagem.textContent = 'Erro ao criar novo professor (código ' + error.message + ')'; 
+				}
+				asyncCriarProf(dadosProfessor, inicializar, errorHandler);
+	        }
+	        
+	        function alterarProfessor() {
+				const errorHandler = function(error) {
+					paragrafoMensagem.textContent = 'Erro ao alterar professor (código ' + error.message + ')'; 
+				}
+	        	const dadosProfessor = {
+	        		'id': txtId.value,
+	        		'nome': txtNome.value,
+	        		'matricula': txtMatricula.value,
+	        		'area': txtArea.value
+	        	};
+				asyncAlterarProf(dadosProfessor, inicializar, errorHandler);        	
+	        }
+	        
+	        function cancelarEdicao() {
+	        	inicializar();
+	        }
+	        
+	        function apagarProfessor() {
+	        	const id = txtId.value;
+				const errorHandler = function(error) { 
+					paragrafoMensagem.textContent = 'Erro ao apagar professor (código ' + error.message + ')'; 
+				} 
+	        	asyncApagarProf(id, inicializar, errorHandler);       		
+	        }
+	        
+	    </script>    
+    </body>
+    
+    </html>
+
+    

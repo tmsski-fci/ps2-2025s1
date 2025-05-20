@@ -23,6 +23,11 @@ class ProfessorController {
 
 	}
 	
+    @GetMapping("/api/professores")
+    Iterable<Professor> getProfessores() {
+        return professorRepo.findAll();
+    }
+
 	@GetMapping("/api/professores/{id}")
 	Optional<Professor> getProfessor(@PathVariable long id) {
 		return professorRepo.findById(id);

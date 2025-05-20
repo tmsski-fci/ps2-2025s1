@@ -1,0 +1,34 @@
+### GET
+GET http://localhost:8080/api/professores
+
+
+### POST
+POST http://localhost:8080/api/professores
+Content-Type: application/json
+
+{
+    "nome": "Ana",
+    "matricula": "12345",
+    "area": "Engenharia"
+}
+
+
+### POST
+POST http://localhost:8080/api/professores
+Content-Type: application/json
+
+{
+    "nome": "Bob",
+    "matricula": "11111",
+    "area": "Inteligência Artificial"
+}
+
+### POST
+POST http://localhost:8080/api/professores
+Content-Type: application/json
+
+{
+    "nome": "Carmem",
+    "matricula": "54321",
+    "area": "Direito Trabalhista"
+}
